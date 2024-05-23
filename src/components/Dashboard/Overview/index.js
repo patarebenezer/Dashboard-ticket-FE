@@ -9,7 +9,7 @@ import Tasks from "./Tasks";
 import Spinner from "./Spinner";
 
 export default function Overview() {
- const [data, setData] = useState(null); // Default to null to handle loading state
+ const [data, setData] = useState(null);
 
  const dataOverview = async () => {
   try {

@@ -11,7 +11,7 @@ import {
 
 export const menuItems = [
  { name: "Overview", icon: <BsFillPieChartFill />, path: "/dashboard" },
- { name: "Tickets", icon: <BsTicketFill />, path: "#" },
+ { name: "Tickets", icon: <BsTicketFill />, path: "/ticket" },
  { name: "Ideas", icon: <BsLightbulbFill />, path: "#" },
  { name: "Contacts", icon: <BsPeopleFill />, path: "#" },
  { name: "Agents", icon: <BsPersonBadgeFill />, path: "#" },

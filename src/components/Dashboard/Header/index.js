@@ -4,10 +4,13 @@ import { BiSearch } from "react-icons/bi";
 import { BsBellFill } from "react-icons/bs";
 import { LuLogOut } from "react-icons/lu";
 import { useAuth } from "../../../contexts/AuthContext";
+import { useLocation } from "react-router";
 
 const Header = () => {
  const { user, logout } = useAuth();
+ const location = useLocation();
  const [dropdownOpen, setDropdownOpen] = useState(false);
+ const pathname = location.pathname.replace(/\//g, "");
 
  const handleLogout = () => {
   logout();
@@ -17,7 +20,7 @@ const Header = () => {
  return (
   <div className='flex flex-col md:flex-row justify-between items-center p-6'>
    <div>
-    <h1 className='text-2xl font-semibold'>Overview</h1>
+    <h1 className='text-2xl font-semibold capitalize'>{pathname}</h1>
    </div>
    <div className='flex items-center'>
     <div className='flex'>
@@ -30,10 +33,10 @@ const Header = () => {
     </div>
     <div className='flex items-center'>
      <span className='mr-2 font-semibold antialiased capitalize'>
-      {user.roles}
+      {user?.roles}
      </span>
      <img
-      src={user.avatar}
+      src={user?.avatar}
       alt='avatar'
       className='w-10 h-10 border-white border-[0.2rem] rounded-full cursor-pointer'
       onClick={() => setDropdownOpen(!dropdownOpen)}

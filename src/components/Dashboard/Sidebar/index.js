@@ -1,11 +1,17 @@
 // Sidebar.js
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { menuItems } from "./menuItems";
 
 const Sidebar = () => {
- const [selectedMenu, setSelectedMenu] = useState("Overview");
+ const location = useLocation();
  const clicked = "bg-gray-700 text-gray-400 border-l-2 border-white";
+ const pathname = location.pathname.replace(/\//g, "");
+ const [selectedMenu, setSelectedMenu] = useState(pathname);
+
+ useEffect(() => {
+  setSelectedMenu(pathname);
+ }, [pathname]);
 
  const handleMenuClick = (menu) => {
   setSelectedMenu(menu);
@@ -32,9 +38,9 @@ const Sidebar = () => {
       <Link
        to={item.path}
        className={`block py-4 px-8 hover:bg-gray-700 ${
-        selectedMenu === item.name ? clicked : ""
+        selectedMenu === item.path.replace(/\//g, "") ? clicked : ""
        }`}
-       onClick={() => handleMenuClick(item.name)}
+       onClick={() => handleMenuClick(item.path.replace(/\//g, ""))}
       >
        <div className='flex gap-6 items-center'>
         {item.icon}
