@@ -13,10 +13,10 @@ function generateRandomString(length) {
  return result;
 }
 
-export const loginService = async (username, password) => {
+export const loginService = async (email, password) => {
  const response = await axios.get(`${API_URL}/users`, {
   params: {
-   username,
+   email,
    password,
   },
  });
@@ -26,11 +26,9 @@ export const loginService = async (username, password) => {
   // Simpan user dan token (untuk contoh ini, token bisa berupa ID pengguna)
   const user = users[0];
   const token = generateRandomString(100);
-  console.log("token", token);
-  console.log("user", user);
   return { user, token };
  } else {
-  throw new Error("Invalid username or password");
+  throw new Error("Invalid email or password");
  }
 };
 

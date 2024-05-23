@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useContext } from "react";
+import React, { createContext, useReducer, useContext, useEffect } from "react";
 import { authReducer } from "../reducers/authReducer";
 
 const AuthContext = createContext();
@@ -12,11 +12,30 @@ const initialState = {
 export const AuthProvider = ({ children }) => {
  const [state, dispatch] = useReducer(authReducer, initialState);
 
+ useEffect(() => {
+  // Load authentication state from localStorage
+  const storedUser = localStorage.getItem("user");
+  const storedToken = localStorage.getItem("token");
+  if (storedUser && storedToken) {
+   console.log("Restoring user from localStorage", storedUser);
+   dispatch({
+    type: "LOGIN",
+    payload: { user: JSON.parse(storedUser), token: storedToken },
+   });
+  } else {
+   console.log("No authentication found in localStorage");
+  }
+ }, []);
+
  const login = (user, token) => {
+  localStorage.setItem("user", JSON.stringify(user));
+  localStorage.setItem("token", token);
   dispatch({ type: "LOGIN", payload: { user, token } });
  };
 
  const logout = () => {
+  localStorage.removeItem("user");
+  localStorage.removeItem("token");
   dispatch({ type: "LOGOUT" });
  };
 
