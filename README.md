@@ -2,6 +2,8 @@
 
 This project is a ReactJS-based dashboard application that supports both light and dark modes. It includes components for sidebar navigation, header, and an overview section.
 
+You can access here : https://dashboard-ticket-fe.vercel.app/
+
 ## Requirements
 
 - **ReactJS Version**: 17.0.0 || ^18.0.0
