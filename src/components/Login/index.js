@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuth";
 import { loginService } from "../../services/auth";
@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { FaSpinner } from "react-icons/fa";
 import { formFields } from "./formFields";
 import Input from "./Input";
+import { useAuth } from "../../contexts/AuthContext";
 
 const LoginForm = () => {
  const {
@@ -17,6 +18,8 @@ const LoginForm = () => {
  const [error, setError] = useState("");
  const { login } = useAuthContext();
  const navigate = useNavigate();
+ const { isAuthenticated, user } = useAuth();
+ const token = localStorage.getItem("token");
 
  const onSubmit = async (data) => {
   setLoading(true);
@@ -32,6 +35,12 @@ const LoginForm = () => {
    setLoading(false);
   }
  };
+
+ useEffect(() => {
+  if (token && isAuthenticated) {
+   navigate("/dashboard");
+  }
+ }, [isAuthenticated, navigate, token]);
 
  return (
   <div className='flex h-screen flex-col items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-400 to-gray-800'>
