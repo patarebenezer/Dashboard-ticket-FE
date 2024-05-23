@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://664c56f235bbda10987ff145.mockapi.io/api/v1/login";
+const API_URL = "https://664c56f235bbda10987ff145.mockapi.io/api/v1";
 
 function generateRandomString(length) {
  const characters =
@@ -23,15 +23,10 @@ export const loginService = async (email, password) => {
 
  const users = response.data;
  if (users.length > 0) {
-  // Simpan user dan token (untuk contoh ini, token bisa berupa ID pengguna)
   const user = users[0];
   const token = generateRandomString(100);
   return { user, token };
  } else {
   throw new Error("Invalid email or password");
  }
-};
-
-export const logoutService = async () => {
- // Implementasikan logout jika perlu
 };

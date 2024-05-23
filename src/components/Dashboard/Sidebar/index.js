@@ -1,3 +1,4 @@
+// Sidebar.js
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { menuItems } from "./menuItems";
@@ -11,14 +12,14 @@ const Sidebar = () => {
  };
 
  return (
-  <div className='h-screen w-1/6 bg-gray-800 text-white'>
+  <div className='h-auto w-full md:w-1/4 bg-gray-800 text-white'>
    <div className='flex gap-3 items-center justify-center py-10'>
     <div className='flex justify-center'>
      <div className='bg-blue-700 h-10 w-10 rounded-full flex items-center justify-center text-white text-2xl'>
       D
      </div>
     </div>
-    <h2 className='text-center text-2xl font-bold antialiased text-gray-500'>
+    <h2 className='text-center text-lg lg:text-2xl font-bold antialiased text-gray-500'>
      Dashboard Kit
     </h2>
    </div>

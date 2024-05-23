@@ -1,3 +1,4 @@
+// Header.js
 import { useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { BsBellFill } from "react-icons/bs";
@@ -14,7 +15,7 @@ const Header = () => {
  };
 
  return (
-  <div className='flex justify-between items-center p-6'>
+  <div className='flex flex-col md:flex-row justify-between items-center p-6'>
    <div>
     <h1 className='text-2xl font-semibold'>Overview</h1>
    </div>

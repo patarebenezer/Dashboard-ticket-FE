@@ -1,66 +1,92 @@
-import React from "react";
-import { LineChart } from "@mui/x-charts/LineChart";
+// Overview.js
+import React, { useEffect, useState } from "react";
+import { overviewService } from "../../../services/overview";
+import Card from "./Card";
+import { LineChart } from "@mui/x-charts";
+import SubCard from "./SubCard";
+import UnresolvedTickets from "./UnresolvedTickets";
+import Tasks from "./Tasks";
+import Spinner from "./Spinner";
 
-const Overview = () => {
- const data = [
-  { x: 1, y: 10 },
-  { x: 2, y: 15 },
-  { x: 3, y: 20 },
-  { x: 4, y: 25 },
-  { x: 5, y: 30 },
- ];
+export default function Overview() {
+ const [data, setData] = useState(null); // Default to null to handle loading state
+
+ const dataOverview = async () => {
+  try {
+   const response = await overviewService();
+   setData(response[0]);
+  } catch (error) {
+   console.error("Error fetching overview data", error);
+  }
+ };
+
+ const currentDateTime = new Date();
+ const formattedDate = currentDateTime.toLocaleDateString(undefined, {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+ });
+ const formattedTime = currentDateTime.toLocaleTimeString(undefined, {
+  hour: "2-digit",
+  minute: "2-digit",
+ });
+
+ useEffect(() => {
+  dataOverview();
+ }, []);
+
+ if (!data) {
+  return (
+   <div className='flex justify-center items-center min-h-screen -mt-10'>
+    <Spinner />
+   </div>
+  );
+ }
 
  return (
-  <div className='p-4 bg-gray-100 min-h-screen'>
-   <div className='grid grid-cols-4 gap-4 mb-6'>
-    <div className='p-4 bg-white rounded shadow text-center'>
-     <h2 className='text-xl font-bold'>Unresolved</h2>
-     <p className='text-2xl'>60</p>
+  <>
+   <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 justify-between mx-6 my-10'>
+    <Card title={"Unresolved"} totalCount={data.unresolved} />
+    <Card title={"Overdue"} totalCount={data.overdue} />
+    <Card title={"Open"} totalCount={data.openTicket} />
+    <Card title={"On hold"} totalCount={data.onHold} />
+   </div>
+   <div className='bg-white grid grid-cols-1 lg:grid-cols-2 mx-6 rounded-md'>
+    <div className='w-full'>
+     <div className='p-4'>
+      <p className='font-bold text-lg antialiased'>Today's trends</p>
+      <span className='font-semibold antialiased text-gray-400 text-sm'>
+       as of {formattedDate} {formattedTime}
+      </span>
+     </div>
+     <LineChart
+      series={[
+       {
+        data: [2, 5.5, 2, 8.5, 1.5, 5],
+       },
+      ]}
+      height={400}
+      margin={{ left: 30, right: 30, top: 30, bottom: 30 }}
+      grid={{ horizontal: true }}
+     />
     </div>
-    <div className='p-4 bg-white rounded shadow text-center'>
-     <h2 className='text-xl font-bold'>Overdue</h2>
-     <p className='text-2xl'>16</p>
-    </div>
-    <div className='p-4 bg-white rounded shadow text-center'>
-     <h2 className='text-xl font-bold'>Open</h2>
-     <p className='text-2xl'>43</p>
-    </div>
-    <div className='p-4 bg-white rounded shadow text-center'>
-     <h2 className='text-xl font-bold'>On hold</h2>
-     <p className='text-2xl'>64</p>
+    <div className='flex flex-col w-full py-2 items-center'>
+     <SubCard title={"Resolved"} totalCount={data.resolved} />
+     <SubCard title={"Received"} totalCount={data.received} />
+     <SubCard
+      title={"Average first response time"}
+      totalCount={"33m"}
+      type={true}
+     />
+     <SubCard title={"Average response time"} totalCount={"3h 8m"} />
+     <SubCard title={"Resolution within SLA"} totalCount={"94%"} />
     </div>
    </div>
-   <div className='bg-white p-4 rounded shadow mb-6'>
-    <h2 className='text-xl font-bold mb-4'>Today's trends</h2>
-    <LineChart
-     xAxis={[{ type: "number", position: "bottom" }]}
-     yAxis={[{ type: "number", position: "left" }]}
-     series={[{ data, label: "Today" }]}
-     width={600}
-     height={300}
-    />
+   <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 mx-6 my-10'>
+    <UnresolvedTickets />
+    <Tasks />
    </div>
-   <div className='grid grid-cols-2 gap-4'>
-    <div className='bg-white p-4 rounded shadow'>
-     <h2 className='text-xl font-bold mb-4'>Unresolved tickets</h2>
-     <ul>
-      <li className='mb-2'>Waiting on Feature Request: 4238</li>
-      <li className='mb-2'>Awaiting Customer Response: 1005</li>
-      <li className='mb-2'>Awaiting Developer Fix: 914</li>
-      <li className='mb-2'>Pending: 281</li>
-     </ul>
-    </div>
-    <div className='bg-white p-4 rounded shadow'>
-     <h2 className='text-xl font-bold mb-4'>Tasks</h2>
-     <ul>
-      <li className='mb-2'>Finish ticket update: Urgent</li>
-      <li className='mb-2'>Create new ticket example: New</li>
-      <li className='mb-2'>Update ticket report: Default</li>
-     </ul>
-    </div>
-   </div>
-  </div>
+  </>
  );
-};
-
-export default Overview;
+}

@@ -13,17 +13,14 @@ export const AuthProvider = ({ children }) => {
  const [state, dispatch] = useReducer(authReducer, initialState);
 
  useEffect(() => {
-  // Load authentication state from localStorage
   const storedUser = localStorage.getItem("user");
   const storedToken = localStorage.getItem("token");
   if (storedUser && storedToken) {
-   console.log("Restoring user from localStorage", storedUser);
    dispatch({
     type: "LOGIN",
     payload: { user: JSON.parse(storedUser), token: storedToken },
    });
   } else {
-   console.log("No authentication found in localStorage");
   }
  }, []);
 

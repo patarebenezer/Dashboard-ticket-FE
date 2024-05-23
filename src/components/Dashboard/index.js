@@ -3,6 +3,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
+import Overview from "./Overview";
 
 const Dashboard = () => {
  const navigate = useNavigate();
@@ -12,7 +13,6 @@ const Dashboard = () => {
 
  useEffect(() => {
   if (!token && !isAuthenticated) {
-   console.log("User not authenticated, redirecting to login");
    navigate("/login");
   }
  }, [isAuthenticated, navigate, token]);
@@ -20,15 +20,13 @@ const Dashboard = () => {
  return (
   <div>
    {isAdmin ? (
-    <>
-     <div className='flex bg-[#d9ddef]'>
-      <Sidebar />
-      <div className='flex-1'>
-       <Header />
-       {/* <Overview /> */}
-      </div>
+    <div className='flex flex-col md:flex-row bg-[#e3e5f0] min-h-screen'>
+     <Sidebar />
+     <div className='flex-1'>
+      <Header />
+      <Overview />
      </div>
-    </>
+    </div>
    ) : (
     <p>Welcome Guest! You can only create tickets.</p>
    )}
