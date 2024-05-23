@@ -18,7 +18,7 @@ const LoginForm = () => {
  const [error, setError] = useState("");
  const { login } = useAuthContext();
  const navigate = useNavigate();
- const { isAuthenticated, user } = useAuth();
+ const { isAuthenticated } = useAuth();
  const token = localStorage.getItem("token");
 
  const onSubmit = async (data) => {
