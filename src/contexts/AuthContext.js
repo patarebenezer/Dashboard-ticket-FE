@@ -20,7 +20,6 @@ export const AuthProvider = ({ children }) => {
     type: "LOGIN",
     payload: { user: JSON.parse(storedUser), token: storedToken },
    });
-  } else {
   }
  }, []);
 

@@ -1,20 +1,20 @@
-// Header.js
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { BiSearch } from "react-icons/bi";
 import { BsBellFill } from "react-icons/bs";
 import { LuLogOut } from "react-icons/lu";
 import { useAuth } from "../../../contexts/AuthContext";
-import { useLocation } from "react-router";
 
 const Header = () => {
  const { user, logout } = useAuth();
- const location = useLocation();
+ const navigate = useNavigate();
  const [dropdownOpen, setDropdownOpen] = useState(false);
- const pathname = location.pathname.replace(/\//g, "");
+ const pathname = window.location.pathname.replace(/\//g, "");
 
  const handleLogout = () => {
   logout();
   setDropdownOpen(false);
+  navigate("/login");
  };
 
  return (
@@ -43,7 +43,7 @@ const Header = () => {
      />
 
      {dropdownOpen && (
-      <div className='absolute right-0 mt-24 w-fit mr-10 bg-gray-700 transition duration-300 ease-in-out transform  hover:bg-gray-600 rounded-md shadow-lg z-10'>
+      <div className='absolute right-0 mt-24 w-fit mr-10 bg-gray-700 transition duration-300 ease-in-out transform hover:bg-gray-600 rounded-md shadow-lg z-10'>
        <ul>
         <li>
          <button
