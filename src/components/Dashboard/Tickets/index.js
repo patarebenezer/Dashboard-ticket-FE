@@ -18,7 +18,7 @@ const getPriorityClass = (priority) => {
   case "groceries":
    return "bg-green-500 text-white";
   default:
-   return "bg-gray-200";
+   return "bg-gray-200 dark:text-black";
  }
 };
 
@@ -118,12 +118,12 @@ const TicketList = () => {
  };
 
  return (
-  <div className='max-w-7xl mx-6 my-10 bg-white p-8 rounded-lg shadow-md'>
+  <div className='max-w-7xl mx-6 my-10 bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md'>
    <div className='flex justify-between items-center mb-4'>
     <h1 className='text-2xl font-semibold'>All tickets</h1>
     <div className='flex space-x-4'>
      <div className='flex items-center space-x-2'>
-      <BsSortUp className='text-gray-600' />
+      <BsSortUp className='text-gray-600 dark:text-white' />
       <select
        value={sortKey}
        onChange={handleSortChange}
@@ -138,7 +138,7 @@ const TicketList = () => {
       </select>
      </div>
      <div className='flex items-center space-x-2'>
-      <FaFilter className='text-gray-600' />
+      <FaFilter className='text-gray-600 dark:text-white' />
       <select
        value={filterKey}
        onChange={handleFilterChange}
@@ -156,7 +156,7 @@ const TicketList = () => {
     </div>
    </div>
    <div className='overflow-x-auto'>
-    <table className='min-w-full bg-white'>
+    <table className='min-w-full bg-white dark:bg-slate-800'>
      <thead>
       <tr className='text-left text-gray-400 antialiased'>
        <th className='py-2 px-4 border-b border-gray-200'>Ticket details</th>
@@ -167,7 +167,7 @@ const TicketList = () => {
      </thead>
      <tbody>
       {currentTickets.map((ticket, index) => (
-       <tr key={index} className='hover:bg-gray-100'>
+       <tr key={index} className='hover:bg-gray-100 dark:hover:bg-gray-600'>
         <td className='py-4 px-6 border-b border-gray-200 flex items-center'>
          <img
           src={ticket?.images[0]}

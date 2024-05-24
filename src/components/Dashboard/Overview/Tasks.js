@@ -1,4 +1,3 @@
-import React from "react";
 import { BiPlus } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
@@ -14,7 +13,7 @@ const Tasks = () => {
  ];
 
  return (
-  <div className='bg-white rounded-lg shadow-md w-full'>
+  <div className='bg-white dark:bg-gray-800 rounded-lg shadow-md w-full'>
    <div className='flex justify-between items-center mb-4'>
     <h2 className='text-xl font-semibold px-4 pt-4'>Tasks</h2>
     <Link href='#' className='text-blue-500 px-4'>

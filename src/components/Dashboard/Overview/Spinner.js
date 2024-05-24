@@ -1,5 +1,3 @@
-import React from "react";
-
 const Spinner = () => {
  return (
   <div className='flex items-center justify-center space-x-2 animate-spin'>

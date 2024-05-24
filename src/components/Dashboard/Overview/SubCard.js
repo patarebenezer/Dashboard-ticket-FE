@@ -1,9 +1,7 @@
-import React from "react";
-
 export default function SubCard({ title, totalCount }) {
  return (
   <div
-   className={`bg-white border-l ${
+   className={`border-l ${
     title.includes("Resolution") ? "" : "border-b"
    } border-gray-300 w-full py-4 text-center`}
   >

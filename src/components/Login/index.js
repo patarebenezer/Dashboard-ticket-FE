@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuthContext } from "../../hooks/useAuth";
-import { loginService } from "../../services/auth";
 import { useForm } from "react-hook-form";
 import { FaSpinner } from "react-icons/fa";
+import { useAuthContext } from "../../hooks/useAuth";
+import { loginService } from "../../services/auth";
+import { useAuth } from "../../contexts/AuthContext";
 import { formFields } from "./formFields";
 import Input from "./Input";
-import { useAuth } from "../../contexts/AuthContext";
 
 const LoginForm = () => {
  const {

@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 const UnresolvedTickets = () => {
@@ -10,7 +9,7 @@ const UnresolvedTickets = () => {
  ];
 
  return (
-  <div className='bg-white rounded-lg shadow-md w-full'>
+  <div className='bg-white dark:bg-gray-800 rounded-lg shadow-md w-full'>
    <div className='flex justify-between items-center mb-4 pt-4'>
     <h2 className='text-xl font-semibold px-4'>Unresolved tickets</h2>
     <Link href='#' className='text-blue-500 px-4'>

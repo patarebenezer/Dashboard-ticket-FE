@@ -1,12 +1,11 @@
-// Overview.js
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { LineChart } from "@mui/x-charts";
 import { overviewService } from "../../../services/overview";
 import Card from "./Card";
-import { LineChart } from "@mui/x-charts";
-import SubCard from "./SubCard";
-import UnresolvedTickets from "./UnresolvedTickets";
 import Tasks from "./Tasks";
+import SubCard from "./SubCard";
 import Spinner from "./Spinner";
+import UnresolvedTickets from "./UnresolvedTickets";
 
 export default function Overview() {
  const [data, setData] = useState(null);
@@ -52,7 +51,7 @@ export default function Overview() {
     <Card title={"Open"} totalCount={data.openTicket} />
     <Card title={"On hold"} totalCount={data.onHold} />
    </div>
-   <div className='bg-white grid grid-cols-1 lg:grid-cols-2 mx-6 rounded-md'>
+   <div className='bg-white dark:bg-gray-700 dark:text-white grid grid-cols-1 lg:grid-cols-2 mx-6 rounded-md'>
     <div className='w-full'>
      <div className='p-4'>
       <p className='font-bold text-lg antialiased'>Today's trends</p>

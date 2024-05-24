@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BiSearch } from "react-icons/bi";
-import { BsBellFill } from "react-icons/bs";
 import { LuLogOut } from "react-icons/lu";
+import { BsBellFill } from "react-icons/bs";
 import { useAuth } from "../../../contexts/AuthContext";
 
 const Header = () => {
