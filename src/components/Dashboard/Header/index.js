@@ -4,8 +4,10 @@ import { BiSearch } from "react-icons/bi";
 import { LuLogOut } from "react-icons/lu";
 import { BsBellFill } from "react-icons/bs";
 import { useAuth } from "../../../contexts/AuthContext";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
+ const { t } = useTranslation();
  const { user, logout } = useAuth();
  const navigate = useNavigate();
  const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -20,7 +22,7 @@ const Header = () => {
  return (
   <div className='flex flex-col md:flex-row justify-between items-center p-6'>
    <div>
-    <h1 className='text-2xl font-semibold capitalize'>{pathname}</h1>
+    <h1 className='text-2xl font-semibold capitalize'>{t(pathname)}</h1>
    </div>
    <div className='flex items-center'>
     <div className='flex'>

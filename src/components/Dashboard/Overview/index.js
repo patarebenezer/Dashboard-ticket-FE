@@ -6,6 +6,7 @@ import Tasks from "./Tasks";
 import SubCard from "./SubCard";
 import Spinner from "./Spinner";
 import UnresolvedTickets from "./UnresolvedTickets";
+import { useTranslation } from "react-i18next";
 
 export default function Overview() {
  const [data, setData] = useState(null);
@@ -31,6 +32,7 @@ export default function Overview() {
   minute: "2-digit",
  });
 
+ const { t } = useTranslation();
  useEffect(() => {
   dataOverview();
  }, []);
@@ -46,15 +48,15 @@ export default function Overview() {
  return (
   <>
    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 justify-between mx-6 my-10'>
-    <Card title={"Unresolved"} totalCount={data.unresolved} />
-    <Card title={"Overdue"} totalCount={data.overdue} />
-    <Card title={"Open"} totalCount={data.openTicket} />
-    <Card title={"On hold"} totalCount={data.onHold} />
+    <Card title={t("unresolved")} totalCount={data.unresolved} />
+    <Card title={t("overdue")} totalCount={data.overdue} />
+    <Card title={t("open")} totalCount={data.openTicket} />
+    <Card title={t("onhold")} totalCount={data.onHold} />
    </div>
    <div className='bg-white dark:bg-gray-700 dark:text-white grid grid-cols-1 lg:grid-cols-2 mx-6 rounded-md'>
     <div className='w-full'>
      <div className='p-4'>
-      <p className='font-bold text-lg antialiased'>Today's trends</p>
+      <p className='font-bold text-lg antialiased'>{t("Today's trends")}</p>
       <span className='font-semibold antialiased text-gray-400 text-sm'>
        as of {formattedDate} {formattedTime}
       </span>
@@ -71,15 +73,11 @@ export default function Overview() {
      />
     </div>
     <div className='flex flex-col w-full py-2 items-center'>
-     <SubCard title={"Resolved"} totalCount={data.resolved} />
-     <SubCard title={"Received"} totalCount={data.received} />
-     <SubCard
-      title={"Average first response time"}
-      totalCount={"33m"}
-      type={true}
-     />
-     <SubCard title={"Average response time"} totalCount={"3h 8m"} />
-     <SubCard title={"Resolution within SLA"} totalCount={"94%"} />
+     <SubCard title={t("resolved")} totalCount={data.resolved} />
+     <SubCard title={t("received")} totalCount={data.received} />
+     <SubCard title={t("averagefirst")} totalCount={"33m"} type={true} />
+     <SubCard title={t("averagefirstresponse")} totalCount={"3h 8m"} />
+     <SubCard title={t("resolution")} totalCount={"94%"} />
     </div>
    </div>
    <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 mx-6 my-10'>

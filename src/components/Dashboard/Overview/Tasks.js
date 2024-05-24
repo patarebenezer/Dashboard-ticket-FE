@@ -1,12 +1,18 @@
+import { useTranslation } from "react-i18next";
 import { BiPlus } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
 const Tasks = () => {
+ const { t } = useTranslation();
  const tasks = [
-  { name: "Finish ticket update", status: "URGENT", color: "bg-yellow-500" },
-  { name: "Create new ticket example", status: "NEW", color: "bg-green-500" },
+  { name: t("Finish ticket update"), status: "URGENT", color: "bg-yellow-500" },
   {
-   name: "Update ticket report",
+   name: t("Create new ticket example"),
+   status: "NEW",
+   color: "bg-green-500",
+  },
+  {
+   name: t("Update ticket report"),
    status: "DEFAULT",
    color: "bg-gray-200 !text-gray-400",
   },
@@ -26,7 +32,7 @@ const Tasks = () => {
    <div>
     <div className={`flex justify-between py-2 border-b`}>
      <span className='px-4 pb-2 font-semibold antialiased text-gray-300'>
-      Create new task
+      {t("Create new task")}
      </span>
      <span
       className={`font-semibold px-1 py-1 rounded-lg bg-gray-300 mr-4 hover:cursor-pointer`}

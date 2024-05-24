@@ -8,6 +8,7 @@ import {
 import { FaFilter } from "react-icons/fa";
 import { ticketService } from "../../../services/ticket";
 import Spinner from "../Overview/Spinner";
+import { useTranslation } from "react-i18next";
 
 const getPriorityClass = (priority) => {
  switch (priority) {
@@ -23,6 +24,8 @@ const getPriorityClass = (priority) => {
 };
 
 const TicketList = () => {
+ const { t } = useTranslation();
+
  const [tickets, setTickets] = useState(null);
  const [currentPage, setCurrentPage] = useState(1);
  const [itemsPerPage, setItemsPerPage] = useState(8);
@@ -120,7 +123,7 @@ const TicketList = () => {
  return (
   <div className='max-w-7xl mx-6 my-10 bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md'>
    <div className='flex justify-between items-center mb-4'>
-    <h1 className='text-2xl font-semibold'>All tickets</h1>
+    <h1 className='text-2xl font-semibold'>{t("All tickets")}</h1>
     <div className='flex space-x-4'>
      <div className='flex items-center space-x-2'>
       <BsSortUp className='text-gray-600 dark:text-white' />
@@ -159,10 +162,14 @@ const TicketList = () => {
     <table className='min-w-full bg-white dark:bg-slate-800'>
      <thead>
       <tr className='text-left text-gray-400 antialiased'>
-       <th className='py-2 px-4 border-b border-gray-200'>Ticket details</th>
-       <th className='py-2 px-4 border-b border-gray-200'>Customer name</th>
-       <th className='py-2 px-4 border-b border-gray-200'>Date</th>
-       <th className='py-2 px-4 border-b border-gray-200'>Priority</th>
+       <th className='py-2 px-4 border-b border-gray-200'>
+        {t("Ticket details")}
+       </th>
+       <th className='py-2 px-4 border-b border-gray-200'>
+        {t("Customer name")}
+       </th>
+       <th className='py-2 px-4 border-b border-gray-200'>{t("Date")}</th>
+       <th className='py-2 px-4 border-b border-gray-200'>{t("Priority")}</th>
       </tr>
      </thead>
      <tbody>
@@ -177,7 +184,7 @@ const TicketList = () => {
          <div>
           <p className='font-semibold'>{ticket?.title}</p>
           <p className='text-sm text-gray-300'>
-           Updated {ticket?.weight} day ago
+           {t("Updated")} {ticket?.weight} day ago
           </p>
          </div>
         </td>
